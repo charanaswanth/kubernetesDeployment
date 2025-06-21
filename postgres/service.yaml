@@ -1,0 +1,15 @@
+apiVersion: v1
+kind:  Service
+metadata:
+  name: postgresql-svc
+  namespace: psql
+  labels:
+    app: postgresql
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    app: postgresql
