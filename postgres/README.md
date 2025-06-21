@@ -1,3 +1,5 @@
+# PostgreSQL Setup
+
 1. Create persistentVolume and persistentVolumeClaim
 2. Create psql deployment and service
 3. Service is created as NodeType to connect from outside the minikube cluster
