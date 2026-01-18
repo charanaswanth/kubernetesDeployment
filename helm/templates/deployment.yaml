@@ -24,8 +24,8 @@ spec:
           image: {{ .Values.image }}
           imagePullPolicy: IfNotPresent
           ports:
-          {{- range .Values.container.ports }}
-            - containerPort: {{ .port }}
+          {{- range $svc := .Values.service.ports }}
+            - containerPort: {{ $svc.containerPort }}
           {{ end }}
 
           {{- if .Values.container.environment }}

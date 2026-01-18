@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.application }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    project: {{ .Values.project }}
+    application: {{ .Values.application }}
+spec:
+  selector:
+    project: {{ .Values.project }}
+    application: {{ .Values.application }}
+  type: {{ .Values.service.type | default "ClusterIP" }}
+  ports:
+  {{- range $svc := .Values.service.ports }}
+    - name: {{ $svc.name }}
+      protocol: {{ $svc.protocol | default "TCP" }}
+      port: {{ $svc.svcPort }}
+      targetPort: {{ $svc.containerPort }}
+  {{- end }}

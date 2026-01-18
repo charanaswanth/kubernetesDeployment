@@ -17,8 +17,6 @@ minimum:
 
 #container
 container:
-  ports:
-    - port: 8080
   environment:
     map:
       check: value
@@ -27,3 +25,12 @@ container:
     #     keys:
     #       - DB_PASSWORD
     #       - DB_USERNAME
+
+#networking
+service:
+  ports:
+    - name: cart-port
+      protocol: TCP
+      svcPort: 8080
+      containerPort: 8080
+
