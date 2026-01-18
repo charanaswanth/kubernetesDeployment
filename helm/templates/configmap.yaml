@@ -1,0 +1,25 @@
+{{- if .Values.config }}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application }}-configmap
+  namespace: {{ .Values.namespace }}
+  labels:
+    project: {{ .Values.project }}
+    application: {{ .Values.application }}
+data:
+  {{- if .Values.config.mapType }}
+    {{- range $key,$value := .Values.config.mapType }}
+  {{ $key }}: {{ $value | quote}}
+    {{ end }}
+  {{  end }}
+
+  {{- if .Values.config.fileType }}
+    {{- range $key,$value := .Values.config.fileType }}
+  {{ $key }}: |
+{{ $value | indent 4 }}
+    {{- end }}
+  {{- end }}
+  
+{{- end }}

@@ -1,0 +1,7 @@
+deployment
+    volumes
+    resources
+service
+configmap
+secrets
+persistentVolumes
