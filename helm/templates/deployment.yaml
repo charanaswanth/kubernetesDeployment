@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    project: {{ .Values.project }}
+    application: {{ .Values.application }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      project: {{ .Values.project }}
+      application: {{ .Values.application }}
+  template:
+    metadata:
+      namespace: {{ .Values.project }}
+      labels:
+        project: {{ .Values.project }}
+        application: {{ .Values.application }}
+    spec:
+      containers:
+        - name: {{ .Values.application }}
+          image: {{ .Value.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+          {{- range $key := .Values.container.ports }}
+          - containerPort: {{ $key.port }}
+          {{ end }}
+
+          {{- if .Values.container.environment }}
+          env:
+            {{- if .Values.container.environment.map }}
+            {{- range $key, $value := .Values.container.environment.map }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{ end }}
+            {{ end }}
+
+            {{- if .Values.container.environment.secrets }}
+            {{- range $secrets := .Values.container.environment.secrets }}
+              {{- range $secrets.keys }}
+            - name: {{ . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secrets.name }}
+                  key: {{ . }}
+            {{ end }}
+            {{ end }}
+            {{ end }}
+
+          {{ end }}
+          resources:
+            limits:
+              cpu: {{ .Values.maximum.cpu }}
+              memory: {{ .Values.maximum.memory }}
+            requests:
+              cpu: {{ .Values.minimum.cpu }}
+              memory: {{ .Values.minimum.memory }}
+      restartPolicy: Always

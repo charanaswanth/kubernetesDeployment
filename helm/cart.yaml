@@ -1,0 +1,29 @@
+#project
+namespace: demoproject
+project: robotShop
+
+#application
+application: cart
+image: cart:1.0
+
+#resource
+replicaCount: 1
+maximum:
+  cpu: 200m
+  memory: 100Mi
+minimum:
+  cpu: 100m
+  memory: 50Mi
+
+#container
+container:
+  ports:
+    - port: 8080
+  environment:
+    map:
+      check: value
+    # secrets:
+    #   - name: db-secret
+    #     keys:
+    #       - DB_PASSWORD
+    #       - DB_USERNAME
