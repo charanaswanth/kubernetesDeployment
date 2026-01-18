@@ -21,11 +21,11 @@ spec:
     spec:
       containers:
         - name: {{ .Values.application }}
-          image: {{ .Value.image }}
+          image: {{ .Values.image }}
           imagePullPolicy: IfNotPresent
           ports:
-          {{- range $key := .Values.container.ports }}
-          - containerPort: {{ $key.port }}
+          {{- range .Values.container.ports }}
+            - containerPort: {{ .port }}
           {{ end }}
 
           {{- if .Values.container.environment }}
