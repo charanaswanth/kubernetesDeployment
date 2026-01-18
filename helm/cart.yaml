@@ -34,7 +34,17 @@ service:
       svcPort: 8080
       containerPort: 8080
 
-#secrets
+#containerSecrets
 # secrets:
 #   DB_USER: admin
 #   DB_PASSWORD: secret123
+
+#configMap
+config:
+  mapType:
+    player_initial_lives: "3"
+    ui_properties_file_name: "user-interface.properties"
+  fileType:
+    game.properties: |
+      enemy.types=aliens,monsters
+      player.maximum-lives=5
