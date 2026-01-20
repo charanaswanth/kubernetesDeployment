@@ -6,12 +6,15 @@
 
 ### 📌 Helm Command
 
+```bash
 helm upgrade --install <release_name> ./helm -f values.yaml
 
 Parameters:
 
-<release_name> – Unique name for the service (e.g., service-a, cart, redis)
-./helm – Path to the Helm chart
--f values.yaml – Service-specific configuration file
+- <release_name> – Unique name for the service (e.g., service-a, cart, redis)
+- ./helm – Path to the Helm chart
+- values.yaml – Service-specific configuration file
+
+### 📌 Helm Flow Chart
 
 ![alt text](helm.jpg)
