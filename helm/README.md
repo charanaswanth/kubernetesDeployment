@@ -18,5 +18,7 @@ Parameters:
 - ./helm – Path to the Helm chart
 - values.yaml – Service-specific configuration file
 
+---
+
 ### 📊 Helm Flow Diagram
 ![alt text](helm.jpg)
