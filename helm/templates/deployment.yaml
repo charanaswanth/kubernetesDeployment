@@ -27,9 +27,16 @@ spec:
           {{- range $svc := .Values.service.ports }}
             - containerPort: {{ $svc.containerPort }}
           {{ end }}
-
-          {{- if .Values.container.environment }}
+          
           env:
+            # agent networking access
+            - name: INSTANA_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+          {{- if .Values.container }}
+            {{- if .Values.container.environment }}
+
             {{- if .Values.container.environment.map }}
             {{- range $key, $value := .Values.container.environment.map }}
             - name: {{ $key }}
@@ -48,7 +55,8 @@ spec:
             {{ end }}
             {{ end }}
             {{ end }}
-
+            
+            {{ end }}
           {{ end }}
           resources:
             limits:
