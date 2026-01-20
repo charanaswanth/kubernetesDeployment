@@ -6,8 +6,11 @@
 
 ### 📌 Helm Command
 
-```bash
-helm upgrade --install <release_name> ./helm -f values.yaml
+> **Command**
+> ```bash
+> helm upgrade --install <release_name> ./helm -f values.yaml
+> ```
+
 
 Parameters:
 
