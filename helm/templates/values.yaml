@@ -34,10 +34,10 @@ service:
       svcPort: 8080
       containerPort: 8080
 
-#containerSecrets
-# secrets:
-#   DB_USER: admin
-#   DB_PASSWORD: secret123
+containerSecrets
+secrets:
+  DB_USER: admin
+  DB_PASSWORD: WDJ4dW8xSnhHdzdiekk5OA==
 
 #configMap
 config:
